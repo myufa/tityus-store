@@ -9,3 +9,13 @@ import Logo from '../../public/home/Logo.png'
 
 const Container = styled(Flex)`
 `
+
+const Footer = () => {
+    return (
+        <Container>
+
+        </Container>
+    )
+}
+
+export default Footer

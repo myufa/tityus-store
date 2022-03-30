@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
 import Flex from 'components/common/flex'
+import SizedImage from 'components/common/sized-image'
 
 import Logo from '../../public/home/Logo.png'
 
@@ -13,7 +13,7 @@ const Container = styled(Flex)`
 type MenuButtonContainerProps = { open?: boolean }
 const MenuButtonContainer = styled(Flex)<MenuButtonContainerProps>`
     ${({open}) => open && 'transform: rotate(90deg)'};
-    transition: transform 0.25s linear;
+    transition: transform 0.45s ease-in;
 `
 
 const SearchInput = styled.input`
@@ -37,31 +37,28 @@ const SearchButton = styled.button`
     padding: 0px;
 `
 
-type ImageSizeProps = { width: number, height: number }
-const ImageConatainer = styled.div<ImageSizeProps>`
-    position: relative;
-    width: ${({ width }) => width}px;
-    height: ${({ height }) => height}px;
+const ScanButton = styled.button`
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: transparent;
+    border-radius: 6px;
+    background-color: #BD4141;
+    cursor: pointer;
+    padding: 0px;
 `
 
-type SizedImageProps = ImageSizeProps & { src: string | StaticImageData, alt: string, scale?: number}
-const SizedImage = ({ width, height, src, alt, scale }: SizedImageProps) => {
-    return (
-        <ImageConatainer width={width * (scale || 1)} height={height * (scale || 1)}>
-            <Image src={src} alt={alt} layout='fill'/>
-        </ImageConatainer>
-    )
-}
+
 
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
-        <Container column height={320}>
+        <Container column>
             <Flex
-                height={120}
-                paddingLeft={30}
-                paddingRight={30}
+                height={90}
                 alignItems='center'
                 justifyContent='space-between'>
                 <Flex
@@ -87,13 +84,18 @@ const Header = () => {
                     {/* <Flex><SizedImage src='/liked-icon.svg' alt='Liked' width={30} height={30} /></Flex> */}
                 </Flex>
             </Flex>
-            <Flex center paddingLeft={30} paddingRight={30}>
+            <Flex column>
                 <Flex
                     center fullWidth>
                     <SearchInput placeholder='Search Product' />
                     <SearchButton>
                         <SizedImage src='/search-icon.svg' alt='Search' width={24} height={24} />
                     </SearchButton>
+                </Flex>
+                <Flex marginTop={8}>
+                    <ScanButton>
+                        Scan Code
+                    </ScanButton>
                 </Flex>
             </Flex>
             <Flex>
