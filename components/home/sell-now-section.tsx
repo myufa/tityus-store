@@ -10,7 +10,7 @@ import Logo from '../../public/home/Logo.png'
 import SizedImage from 'components/common/sized-image'
 
 const Container = styled(Flex)`
-    padding: 30px 0;
+    padding: 0 0 30px 0;
 `
 
 const ContentContainer = styled(Flex)`

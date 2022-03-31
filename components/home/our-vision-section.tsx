@@ -10,7 +10,7 @@ import Logo from '../../public/home/Logo.png'
 const Container = styled(Flex)`
 `
 
-const Section = () => {
+const OurVisionSection = () => {
     return (
         <Container>
 
@@ -18,4 +18,4 @@ const Section = () => {
     )
 }
 
-export default Section
+export default OurVisionSection

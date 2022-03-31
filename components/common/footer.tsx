@@ -8,6 +8,8 @@ import Flex from 'components/common/flex'
 import Logo from '../../public/home/Logo.png'
 
 const Container = styled(Flex)`
+    height: 100px;
+    background-color: yellow;
 `
 
 const Footer = () => {

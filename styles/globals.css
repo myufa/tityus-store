@@ -29,9 +29,13 @@ h1 {
 
 h2 {
   font-family: 'Poppins';
-  font-size: 9px;
+  font-size: 7px;
+  font-weight: medium;
+  color: #707070;
 }
 
 p {
-  font-size: 17px;
+  font-family: 'Poppins';
+  font-size: 8px;
+  color: #707070;
 }

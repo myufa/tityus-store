@@ -8,9 +8,11 @@ import Flex from 'components/common/flex'
 import Logo from '../../public/home/Logo.png'
 
 const Container = styled(Flex)`
+    height: 300px;
+    background-color: purple;
 `
 
-const Section = () => {
+const FindStoreSection = () => {
     return (
         <Container>
 
@@ -18,4 +20,4 @@ const Section = () => {
     )
 }
 
-export default Section
+export default FindStoreSection
