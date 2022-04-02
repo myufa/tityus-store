@@ -19,6 +19,7 @@ const SearchInput = styled.input`
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
+    text-indent: 20px;
     ::placeholder {
         font-family: 'Poppins';
         font-style: normal;
@@ -26,7 +27,6 @@ const SearchInput = styled.input`
         font-size: 12px;
         line-height: 18px;
         font-size: 14px;
-        padding-left: 15px;
     }
 `
 
@@ -41,19 +41,7 @@ const SearchButton = styled.button`
     background-color: #BD4141;
     cursor: pointer;
     padding: 0px;
-`
-
-const ScanButton = styled.button`
-    width: 100%;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-color: transparent;
-    border-radius: 6px;
-    background-color: #BD4141;
-    cursor: pointer;
-    padding: 0px;
+    padding-top: 3px;
 `
 
 const ProductSearch = () => {
@@ -63,7 +51,7 @@ const ProductSearch = () => {
                 center fullWidth>
                 <SearchInput placeholder='Search Product' />
                 <SearchButton>
-                    <SizedImage src='/search-icon.svg' alt='Search' width={24} height={24} />
+                    <SizedImage src='/scan-search.svg' alt='Search' width={24} height={24} />
                 </SearchButton>
             </Flex>
         </Flex>

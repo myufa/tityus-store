@@ -64,6 +64,7 @@ const paragraphText = `
 const GetStartedPage: NextPage = () => {
     const useHeader = useStore(state => state.useHeader)
     const useFooter = useStore(state => state.useFooter)
+
     useHeader(false)
     useFooter(false)
 

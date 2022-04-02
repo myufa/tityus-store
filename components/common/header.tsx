@@ -7,6 +7,7 @@ import SizedImage from 'components/common/sized-image'
 
 import Logo from 'public/home/Logo.png'
 import useStore from 'store'
+import dynamic from 'next/dynamic'
 
 const Container = styled(Flex)`
     padding: 20px 22px 0 22px;
@@ -34,7 +35,7 @@ const Header = () => {
                 onClick={() => toggleMenu()}
                 alignItems='center'>
                 <MenuButtonContainer open={menuOpen}>
-                    <SizedImage src='/menu-icon.svg' alt='Menu' width={40} height={30} scale={0.8}/>
+                    <SizedImage src='/Menu.svg' alt='Menu' width={45} height={45} scale={0.8}/>
                 </MenuButtonContainer>
             </Flex>
             <Flex
@@ -42,11 +43,13 @@ const Header = () => {
                 center
                 pointer>
                 <Link href='/home' passHref>
-                    <SizedImage src={Logo} alt='Logo' width={150} height={49} scale={0.8}/>
+                    <Flex>
+                        <SizedImage src={Logo} alt='Logo' width={150} height={49} scale={0.8}/>
+                    </Flex>
                 </Link>
             </Flex>
         </Container>
     )
 }
 
-export default Header
+export default dynamic(() => Promise.resolve(Header), {ssr: false})

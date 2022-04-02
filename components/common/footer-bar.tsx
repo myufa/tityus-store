@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -5,6 +6,7 @@ import styled from 'styled-components'
 
 import useStore from 'store'
 import Flex from 'components/common/flex'
+import NoSSR from 'components/common/no-ssr'
 import SizedImage from './sized-image'
 
 import ScanIcon from 'public/home/Active.png'
@@ -17,6 +19,7 @@ const Container = styled(Flex)`
 `
 
 const Bar = styled(Flex)`
+    position: relative;
     border-radius: 80px;
     background: white;
     height: 70px;
@@ -35,20 +38,29 @@ const FooterBar = () => {
         <Container center>
             <Bar alignItems='center' justifyContent='space-between' paddingLeft={30} paddingRight={30}>
                 <Link href='/home' passHref>
-                    <SizedImage src='/Home.svg' alt='Home' width={18} height={20}/>
+                    <Flex>
+                        <SizedImage src='/Home.svg' alt='Home' width={18} height={20}/>
+                    </Flex>
                 </Link>
                 <Link href='/liked' passHref>
-                    <SizedImage src='/Liked.svg' alt='Liked' width={20} height={20}/>
+                    <Flex>
+                        <SizedImage src='/Liked.svg' alt='Liked' width={20} height={20}/>
+                    </Flex>
                 </Link>
                 <Link href='/bag' passHref>
-                    <SizedImage src='/Bag.svg' alt='Bag' width={20} height={20}/>
+                    <Flex>
+                        <SizedImage src='/Bag.svg' alt='Bag' width={20} height={20}/>
+                    </Flex>
                 </Link>
                 <Link href='/scan' passHref>
-                    <SizedImage src={ScanIcon} alt='Liked' width={100} height={40}/>
+                    <Flex>
+                        <SizedImage src={ScanIcon} alt='Liked' width={100} height={40}/>
+                    </Flex>
                 </Link>
+
             </Bar>
         </Container>
     )
 }
 
-export default FooterBar
+export default dynamic(() => Promise.resolve(FooterBar), {ssr: false})

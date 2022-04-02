@@ -10,6 +10,7 @@ export enum Organ {
 type StoreType = {
     menuOpen: boolean,
     toggleMenu: () => void,
+    hideMenu: () => void,
     showHeader: boolean,
     showFooter: boolean,
     useHeader: (show?: boolean) => void,
@@ -20,6 +21,7 @@ const useStore = create<StoreType>(set => ({
     toggleMenu: () => set(
         state => ({ menuOpen: !state.menuOpen, showFooter: !state.menuOpen && state.showFooter })
     ),
+    hideMenu: () => set(state => ({ menuOpen: false })),
     showHeader: false,
     showFooter: false,
     useHeader: (show?: boolean) => set(
