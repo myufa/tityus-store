@@ -6,6 +6,7 @@ import Header from 'components/common/header'
 import useStore from 'store'
 import styled, { css } from 'styled-components'
 import ProductSearch from 'components/common/product-search'
+import FooterBar from 'components/common/footer-bar'
 
 type AppContainerProps = { hide: boolean }
 const AppContainer = styled.div<AppContainerProps>`
@@ -20,8 +21,13 @@ const AppContainer = styled.div<AppContainerProps>`
   `}
 `
 
+const FooterPad = styled.div`
+  padding-bottom: 90px;
+`
+
 function MyApp({ Component, pageProps }: AppProps) {
   const menuOpen = useStore(state => state.menuOpen)
+  const showFooter = useStore(state => state.showFooter)
   return(
     <div className='layout'>
       <Script
@@ -30,9 +36,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Header />
       <AppContainer hide={menuOpen}>
-        <ProductSearch />
         <Component {...pageProps} />
       </AppContainer>
+      <FooterBar />
+      {showFooter && <FooterPad />}
     </div>
   )
 }

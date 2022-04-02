@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins';
-  padding: 0 15px;
+  background: #F5F5FA;
 }
 
 a {
@@ -16,9 +16,7 @@ a {
 }
 
 button {
-  background-color: #BD4040;
   font-family: 'Poppins';
-  color: white;
   font-size: 13px;
 }
 
@@ -31,11 +29,9 @@ h2 {
   font-family: 'Poppins';
   font-size: 7px;
   font-weight: medium;
-  color: #707070;
 }
 
 p {
   font-family: 'Poppins';
   font-size: 8px;
-  color: #707070;
 }

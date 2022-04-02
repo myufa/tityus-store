@@ -9,6 +9,7 @@ import Logo from 'public/home/Logo.png'
 import useStore from 'store'
 
 const Container = styled(Flex)`
+    padding: 20px 22px 0 22px;
 `
 
 type MenuButtonContainerProps = { open?: boolean }
@@ -18,44 +19,31 @@ const MenuButtonContainer = styled(Flex)<MenuButtonContainerProps>`
 `
 
 const Header = () => {
+    const showHeader = useStore(state => state.showHeader)
     const menuOpen = useStore(state => state.menuOpen)
     const toggleMenu = useStore(state => state.toggleMenu)
 
+    if (!showHeader) return null
 
     return (
-        <Container column>
+        <Container
+            height={60}
+            alignItems='center'
+            justifyContent='space-between'>
             <Flex
-                height={90}
-                alignItems='center'
-                justifyContent='space-between'>
-                <Flex
-                    onClick={() => toggleMenu()}
-                    widthPct={20}
-                    alignItems='center'>
-                    <MenuButtonContainer open={menuOpen}>
-                        <SizedImage src='/menu-icon.svg' alt='Menu' width={40} height={30} scale={0.8}/>
-                    </MenuButtonContainer>
-                </Flex>
-                <Flex
-                    column
-                    widthPct={60}
-                    center
-                    pointer>
-                    <Link href='/home' passHref>
-                        <SizedImage src={Logo} alt='Logo' width={150} height={49} scale={0.8}/>
-                    </Link>
-                </Flex>
-                <Flex
-                    widthPct={20}
-                    alignItems='center'
-                    justifyContent='flex-end'>
-                    <SizedImage src='/cart-icon.svg' alt='Cart' width={30} height={30.5} scale={0.8}/>
-                    &nbsp;1
-                    {/* <Flex><SizedImage src='/liked-icon.svg' alt='Liked' width={30} height={30} /></Flex> */}
-                </Flex>
+                onClick={() => toggleMenu()}
+                alignItems='center'>
+                <MenuButtonContainer open={menuOpen}>
+                    <SizedImage src='/menu-icon.svg' alt='Menu' width={40} height={30} scale={0.8}/>
+                </MenuButtonContainer>
             </Flex>
-            <Flex>
-
+            <Flex
+                column
+                center
+                pointer>
+                <Link href='/home' passHref>
+                    <SizedImage src={Logo} alt='Logo' width={150} height={49} scale={0.8}/>
+                </Link>
             </Flex>
         </Container>
     )
