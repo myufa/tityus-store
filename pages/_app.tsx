@@ -10,7 +10,7 @@ import FooterBar from 'components/common/footer-bar'
 
 type AppContainerProps = { hide: boolean }
 const AppContainer = styled.div<AppContainerProps>`
-  transition: opacity 0.5s ease-in, height 0.3s linear 0.6s;
+  /* transition: opacity 0.5s ease-in, height 0.3s linear 0.6s;
   ${({ hide }) => hide ? css`
       opacity: 0;
       height: 0;
@@ -18,7 +18,7 @@ const AppContainer = styled.div<AppContainerProps>`
   ` : css`
       opacity: 1;
       height: 100%;
-  `}
+  `} */
 `
 
 const FooterPad = styled.div`
