@@ -26,6 +26,7 @@ const organImageMap = {
 const Container = styled(Flex)`
     padding: 0 22px;
     overflow: auto;
+    min-height: 100vh;
 `
 
 const Heading = styled.h1`
@@ -54,6 +55,52 @@ const Info = styled.h3`
     width: 66%;
 `
 
+const CartContainer = styled.div`
+    height: 50vh;
+    width: 100%;
+    overflow: auto;
+`
+
+const Cost = styled(Flex)`
+    p {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: #414141;
+        margin: 4px 0;
+    }
+`
+
+const Total = styled(Flex)`
+    h2 {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 22px;
+        color: #2F3733;
+    }
+`
+
+const CheckOutButton = styled.button`
+    width: 320px;
+    height: 60px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #BD4040;
+    border-radius: 20px;
+    color: white;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+`
+
 
 const BagPage = () => {
     const useHeader = useStore(state => state.useHeader)
@@ -65,7 +112,9 @@ const BagPage = () => {
 
     const catalogue = useStore(state => state.catalogue)
 
-    const likedItems = [...catalogue.entries()].filter(([_, { liked }]) => liked)
+    const inBagItems = [...catalogue.entries()].filter(([_, { inBag }]) => inBag)
+
+    const totalCost = inBagItems.reduce((acc, [_, { price }]) => price + acc, 0)
 
     const router = useRouter()
 
@@ -83,8 +132,8 @@ const BagPage = () => {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Heading>Shopping Cart</Heading>
             </Flex>
-            <Flex column height={300}>
-                {likedItems.map(([itemId, { name, organType, price }]) => (
+            <CartContainer>
+                {inBagItems.map(([itemId, { name, organType, price }]) => (
                     <InBagCard key={itemId} column justifyContent='center'>
                         <Flex alignItems='center' justifyContent='space-between'>
                             <Flex widthPct={30} justifyContent='flex-start'>
@@ -106,10 +155,28 @@ const BagPage = () => {
                         </Flex>
                     </InBagCard>
                 ))}
-            </Flex>
+            </CartContainer>
             <Flex paddingTop={10} paddingBottom={10}>
-                <SizedImage src='/divider.svg' alt='divider' widthPct={100} height={1}/>
+                <SizedImage src='/divider.svg' alt='divider' width={300} height={2}/>
             </Flex>
+            <Flex fullWidth column paddingLeft={30} paddingRight={30}>
+                <Cost fullWidth justifyContent='space-between'>
+                    <p>Subtotal</p>
+                    <p>${totalCost.toLocaleString('en-US')}</p>
+                </Cost>
+                <Cost fullWidth justifyContent='space-between'>
+                    <p>Tax (6%)</p>
+                    <p>${(0.06 * totalCost).toLocaleString('en-US')}</p>
+                </Cost>
+                <Total fullWidth justifyContent='space-between'>
+                    <h2>Total</h2>
+                    <h2>${(1.06 * totalCost).toLocaleString('en-US')}</h2>
+                </Total>
+            </Flex>
+            <br />
+            <Link href='/shipping' passHref>
+                <CheckOutButton>Check Out</CheckOutButton>
+            </Link>
         </Container>
     )
 }

@@ -14,6 +14,7 @@ import { useEffect } from 'react'
 type AppContainerProps = { hide?: boolean }
 const AppContainer = styled.div<AppContainerProps>`
   transition: opacity 0.5s ease-in, height 0.3s linear 0.6s;
+  min-height: 100vh;
   ${({ hide }) => hide ? css`
       height: ${window.innerHeight - 140}px;
       overflow: hidden;
