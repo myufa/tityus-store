@@ -104,8 +104,8 @@ const Explanation = styled.p`
 `
 
 const AddToCartButton = styled.button`
-    width: 166px;
-    height: 42px;
+    width: 250px;
+    height: 60px;
     margin: 0;
     display: flex;
     align-items: center;
@@ -126,6 +126,8 @@ const StoresPage = () => {
     useHeader()
     useFooter()
 
+    const updateCatalogue = useStore(state => state.updateCatalogue)
+
     const catalogue = useStore(state => state.catalogue)
 
     const router = useRouter()
@@ -133,13 +135,22 @@ const StoresPage = () => {
 
     const item = catalogue.get(+`${itemId}`)
 
+    const onAddToCart = () => {
+        updateCatalogue(+`${itemId}`, { liked: false, inBag: true })
+        router.push('/bag')
+    }
+
+    const onRemoveFromCart = () => {
+        updateCatalogue(+`${itemId}`, { liked: false, inBag: false })
+    }
+
     if (!item) {
         return null
     }
 
     const {
         name, organType, price, vendorAge,
-        amount, origin, procedureDate
+        amount, origin, procedureDate, inBag
     } = item
 
     return (
@@ -207,8 +218,17 @@ const StoresPage = () => {
             )}
             <br />
             <Flex center>
-                <AddToCartButton>Add to Cart</AddToCartButton>
+                { inBag ? (
+                    <AddToCartButton onClick={() => onRemoveFromCart()}>
+                        Remove from cart
+                    </AddToCartButton>)
+                : (
+                    <AddToCartButton onClick={() => onAddToCart()}>
+                        Add to Cart
+                    </AddToCartButton>
+                )}
             </Flex>
+            <br /><br />
         </Container>
     )
 }
