@@ -9,7 +9,7 @@ const Button = styled.button<ButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: transparent;
+    border: none;
     border-radius: 6px;
     background-color: #BD4141;
     cursor: pointer;

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Flex from '../components/common/flex'
 
 import useStore from 'store'
+import SizedImage from 'components/common/sized-image'
 
 const Container = styled(Flex)`
     color: #FAFAFC;
@@ -40,6 +41,7 @@ const GetStartedButton = styled.button`
     align-items: center;
     justify-content: space-between;
     background: white;
+    border: none;
     border-radius: 20px;
     color: black;
     font-style: normal;
@@ -47,6 +49,7 @@ const GetStartedButton = styled.button`
     font-size: 16px;
     line-height: 24px;
     cursor: pointer;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     &:hover {
         color: #BD4040;
     }
@@ -79,11 +82,12 @@ const GetStartedPage: NextPage = () => {
                 </Header>
                 <Paragraph>{paragraphText}</Paragraph>
             </Flex>
-            <Flex>
-                <Link href='/home' passHref>
-                    <GetStartedButton>Get Started</GetStartedButton>
-                </Link>
-            </Flex>
+            <Link href='/home' passHref>
+                <GetStartedButton>
+                    Get Started
+                    <SizedImage src='/right-arrow.svg' alt='go' width={22} height={22}/>
+                    </GetStartedButton>
+            </Link>
         </Container>
     )
 }

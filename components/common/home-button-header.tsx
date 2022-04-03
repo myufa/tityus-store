@@ -12,7 +12,7 @@ const HomeButton = styled.button`
     border-radius: 40px;
     cursor: pointer;
     z-index: 3;
-    border-color: transparent;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -79,6 +79,7 @@ const ContinueButton = styled.button`
     justify-content: center;
     background: #BD4040;
     border-radius: 20px;
+    border: none;
     color: white;
     font-style: normal;
     font-weight: 600;

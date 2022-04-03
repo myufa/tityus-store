@@ -112,6 +112,7 @@ const AddToCartButton = styled.button`
     justify-content: center;
     background: #BD4040;
     border-radius: 15px;
+    border: none;
     color: white;
     font-style: normal;
     font-weight: 600;

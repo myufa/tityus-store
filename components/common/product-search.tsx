@@ -36,7 +36,7 @@ const SearchButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: transparent;
+    border: none;
     border-radius: 0 6px 6px 0;
     background-color: #BD4141;
     cursor: pointer;
@@ -52,6 +52,7 @@ const ProductSearch = () => {
                 <SearchInput placeholder='Search Product' />
                 <SearchButton>
                     <SizedImage src='/scan-search.svg' alt='Search' width={24} height={24} />
+                    <input type='file' accept='image/*' capture='user'/>
                 </SearchButton>
             </Flex>
         </Flex>

@@ -78,6 +78,7 @@ const SendMessageButton = styled.button`
     align-items: center;
     justify-content: center;
     background: #BD4040;
+    border: none;
     border-radius: 20px;
     color: white;
     font-style: normal;
