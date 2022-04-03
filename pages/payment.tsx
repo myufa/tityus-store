@@ -189,7 +189,7 @@ const ShippingPage = () => {
             </Flex>
             <br />
             <SaveCard fullWidth alignItems='center'>
-                <SaveCardCheckbox />
+                <SaveCardCheckbox type='checkbox' />
                 &nbsp;&nbsp;
                 Save this card
             </SaveCard>

@@ -61,28 +61,33 @@ const OrganCard = ({ itemId, liked, organType, price, name }: OrganCardProps) =>
     }
 
     return (
+
         <Container column>
-            <Flex fullWidth justifyContent='flex-end'>
-                <SizedImage
-                    src={`/${likedString}-icon.svg`}
-                    alt='like'
-                    width={30}
-                    height={30}
-                    onClick={onClickLike} />
-            </Flex>
-            <Flex center>
-                <SizedImage
-                    src={organImageMap[organType].image}
-                    alt={organType}
-                    width={organImageMap[organType].w}
-                    height={organImageMap[organType].h} />
-            </Flex>
-            <Flex center>
-                <Price>${price.toLocaleString('en-US')}</Price>
-            </Flex>
-            <Flex center>
-                <Name>{name}</Name>
-            </Flex>
+            <Link href={`/shop/${organType}/${itemId}`} passHref key={itemId}>
+                <Flex column>
+                    <Flex fullWidth justifyContent='flex-end'>
+                        <SizedImage
+                            src={`/${likedString}-icon.svg`}
+                            alt='like'
+                            width={30}
+                            height={30}
+                            onClick={onClickLike} />
+                    </Flex>
+                    <Flex center>
+                        <SizedImage
+                            src={organImageMap[organType].image}
+                            alt={organType}
+                            width={organImageMap[organType].w}
+                            height={organImageMap[organType].h} />
+                    </Flex>
+                    <Flex center>
+                        <Price>${price.toLocaleString('en-US')}</Price>
+                    </Flex>
+                    <Flex center>
+                        <Name>{name}</Name>
+                    </Flex>
+                </Flex>
+            </Link>
         </Container>
     )
 }

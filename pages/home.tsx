@@ -55,9 +55,8 @@ const HomePage: NextPage = () => {
             <Header>Less waiting.<br />More living.</Header>
             <ProductSearch />
             <ServicesSection />
-            <Flex alignItems='center' justifyContent='space-between'>
+            <Flex alignItems='center'>
                 <SubHeader>Categories</SubHeader>
-                <SeeAll>See All</SeeAll>
             </Flex>
             <OfferingsSection />
         </Container>

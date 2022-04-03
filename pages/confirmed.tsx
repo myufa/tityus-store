@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { v4 as uuid } from 'uuid'
 
 import Flex from 'components/common/flex'
 import SizedImage from 'components/common/sized-image'
@@ -35,14 +36,27 @@ const Heading = styled.h1`
     font-size: 24px;
     line-height: 36px;
     width: 80%;
+    margin-top: 0;
 `
 
-const LikedCard = styled(Flex)`
+const PurchasedBanner = styled(Flex)`
     background: #FFFFFF;
     border-radius: 20px;
     padding: 25px;
     margin: 0 0 20px 0;
-    height: 180px;
+    height: 140px;
+`
+
+const PurchasedCard = styled(Flex)`
+    border-bottom: 1px solid #BEC9D9;
+    padding: 25px;
+    margin: 0 0 20px 0;
+    height: 110px;
+`
+
+const PackageConatiner = styled(Flex)`
+    background: #BD4040;
+    border-radius: 12px;
 `
 
 const Info = styled.h3`
@@ -53,85 +67,95 @@ const Info = styled.h3`
     margin: 5px 0 3px 0;
 `
 
-const AddToCartButton = styled.button`
-    width: 166px;
-    height: 42px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #BD4040;
-    border-radius: 15px;
-    color: white;
+const OrderInfo = styled.h3`
+    font-family: 'Poppins';
     font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    cursor: pointer;
+    font-weight: bold;
+    font-size: 17px;
+    margin: 5px 0 3px 0;
 `
 
+const Summary = styled.h4`
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 5px 0 3px 0;
+    color: #7D8FAB;
+`
 
-const LikedPage = () => {
+const ConfirmedPage = () => {
     const useHeader = useStore(state => state.useHeader)
     const useFooter =  useStore(state => state.useFooter)
     useHeader()
     useFooter()
+    const ID = uuid()
 
     const updateCatalogue = useStore(state => state.updateCatalogue)
 
     const catalogue = useStore(state => state.catalogue)
 
-    const likedItems = [...catalogue.entries()].filter(([_, { liked }]) => liked)
+    const purchasedItems = [...catalogue.entries()].filter(([_, { inBag }]) => inBag)
+
+    const totalCost = purchasedItems.reduce((acc, [_, { price }]) => price + acc, 0)
+
+    useEffect(() => {
+        return () => {
+            purchasedItems.forEach(([itemId, _]) => {
+                updateCatalogue(itemId, { inBag: false })
+            })
+        }
+    }, [])
 
     const router = useRouter()
 
-    const onClickBack = () => router.back()
-
-    const onDelete = (itemId: number) => {
-        updateCatalogue(itemId, { liked: false })
-    }
-
-    const onAddToCart = (itemId: number) => {
-        updateCatalogue(itemId, { liked: false, inBag: true })
-    }
-
     return (
         <Container column>
-            <Flex fullWidth alignItems='center'>
+            <Flex fullWidth marginTop={20}>
                 &nbsp;&nbsp;
-                <SizedImage src='/left-arrow.svg' alt='Back' width={24} height={24} onClick={onClickBack} />
+                <Flex marginTop={5}>
+                    <SizedImage src='/confirm-heart.svg' alt='Love' width={24} height={24} />
+                </Flex>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Heading>Saved Items</Heading>
+                <Heading>
+                    Thank you<br />
+                    for your order!
+                </Heading>
             </Flex>
-            {likedItems.map(([itemId, { name, organType, price }]) => (
-                <LikedCard key={itemId} column>
+            <PurchasedBanner paddingLeft={30} paddingRight={30} paddingTop={10}>
+                <Flex fullHeight>
+                    <PackageConatiner width={50} height={50} center marginRight={20} marginTop={5}>
+
+                        <SizedImage src='/package.svg' alt='Package' width={24} height={24} />
+                    </PackageConatiner>
+                </Flex>
+                <Flex column>
+                    <OrderInfo>Order ID #{ID.slice(0,7)}</OrderInfo>
+                    <Summary>
+                        {purchasedItems.length} Items&nbsp;&nbsp;&nbsp;&nbsp;•
+                        </Summary>
+                    <OrderInfo>${totalCost.toLocaleString('en-US')}</OrderInfo>
+                </Flex>
+            </PurchasedBanner>
+            {purchasedItems.map(([itemId, { name, organType, price }]) => (
+                <PurchasedCard key={itemId} column>
                     <Flex alignItems='center' justifyContent='space-between'>
-                        <Flex widthPct={30} justifyContent='flex-start'>
+                        <Flex widthPct={40} justifyContent='flex-start'>
                             <SizedImage
                                 src={organImageMap[organType].image}
                                 alt={organType}
                                 width={organImageMap[organType].w}
                                 height={organImageMap[organType].h}/>
                         </Flex>
-                        <Info>{name}<br />${price.toLocaleString('en-US')}</Info>
-                        <Flex widthPct={30} justifyContent='flex-end'>
-                            <SizedImage
-                                src='/trash-icon.svg'
-                                alt='Delete'
-                                width={20}
-                                height={25}
-                                onClick={() => onDelete(itemId)}/>
+                        <Flex widthPct={60}>
+                            <Info>{name}</Info>
                         </Flex>
                     </Flex>
-                    <Flex center paddingTop={20} paddingBottom={20}>
-                        <AddToCartButton onClick={() => onAddToCart(itemId)}>
-                            Add to Cart
-                        </AddToCartButton>
-                    </Flex>
-                </LikedCard>
+                </PurchasedCard>
             ))}
         </Container>
     )
 }
 
-export default LikedPage
+export default ConfirmedPage

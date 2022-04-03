@@ -15,7 +15,8 @@ export type OrganItem = {
     amount: string,
     stock: number,
     procedureDate: string,
-    description: string,
+    origin: string,
+    vendorAge: number,
     liked: boolean,
     inBag: boolean,
 }
