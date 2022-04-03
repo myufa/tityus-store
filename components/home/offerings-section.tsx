@@ -10,6 +10,7 @@ import Liver from 'public/home/liver1.png'
 import Marrow from 'public/home/bonemarrow1.png'
 import Cornea from 'public/home/cornea2.png'
 import SizedImage from 'components/common/sized-image'
+import { Organ } from 'store'
 
 const Container = styled(Flex)`
     height: 350px;
@@ -46,38 +47,46 @@ const OfferingsSection = () => {
     return (
         <Container alignItems='center'>
             <Flex>
-                <Card column justifyContent='space-between'>
-                    <ImageContainer center>
-                        <SizedImage src={Kidney} alt='Kidney' width={123} height={175} />
-                    </ImageContainer>
-                    <LabelContainer center>
-                        Kidney
-                    </LabelContainer>
-                </Card>
-                <Card column justifyContent='space-between'>
-                    <ImageContainer center>
-                        <SizedImage src={Liver} alt='Liver' width={160} height={160} />
-                    </ImageContainer>
-                    <LabelContainer center>
-                        Liver
-                    </LabelContainer>
-                </Card>
-                <Card column justifyContent='space-between'>
-                    <ImageContainer center>
-                        <SizedImage src={Marrow} alt='Marrow' width={123} height={175} />
-                    </ImageContainer>
-                    <LabelContainer center>
-                        Bone Marrow
-                    </LabelContainer>
-                </Card>
-                <Card column justifyContent='space-between'>
-                    <ImageContainer center>
-                        <SizedImage src={Cornea} alt='Cornea' width={160} height={150} />
-                    </ImageContainer>
-                    <LabelContainer center>
-                        Cornea
-                    </LabelContainer>
-                </Card>
+                <Link href={`shop/${Organ.KIDNEY}`} passHref>
+                    <Card column justifyContent='space-between'>
+                        <ImageContainer center>
+                            <SizedImage src={Kidney} alt='Kidney' width={123} height={175} />
+                        </ImageContainer>
+                        <LabelContainer center>
+                            Kidney
+                        </LabelContainer>
+                    </Card>
+                </Link>
+                <Link href={`shop/${Organ.LIVER}`} passHref>
+                    <Card column justifyContent='space-between'>
+                        <ImageContainer center>
+                            <SizedImage src={Liver} alt='Liver' width={160} height={160} />
+                        </ImageContainer>
+                        <LabelContainer center>
+                            Liver
+                        </LabelContainer>
+                    </Card>
+                </Link>
+                <Link href={`shop/${Organ.MARROW}`} passHref>
+                    <Card column justifyContent='space-between'>
+                        <ImageContainer center>
+                            <SizedImage src={Marrow} alt='Marrow' width={123} height={175} />
+                        </ImageContainer>
+                        <LabelContainer center>
+                            Bone Marrow
+                        </LabelContainer>
+                    </Card>
+                    </Link>
+                <Link href={`shop/${Organ.CORNEA}`} passHref>
+                    <Card column justifyContent='space-between'>
+                        <ImageContainer center>
+                            <SizedImage src={Cornea} alt='Cornea' width={160} height={150} />
+                        </ImageContainer>
+                        <LabelContainer center>
+                            Cornea
+                        </LabelContainer>
+                    </Card>
+                </Link>
             </Flex>
         </Container>
     )

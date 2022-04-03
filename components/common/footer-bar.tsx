@@ -27,10 +27,36 @@ const Bar = styled(Flex)`
     filter: drop-shadow(0px 7px 7px rgba(0, 0, 0, 0.05));
 `
 
+const Badge = styled(Flex)`
+    position: absolute;
+    width: 18px;
+    height: 19px;
+    bottom: -8px;
+    right: -8px;
+    border-radius: 1000px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 12px;
+    background: #BD4040;
+    color: white;
+    opacity: 0.94;
+`
+
+const BadgedFlex = styled(Flex)`
+    position: relative;
+`
 
 
 const FooterBar = () => {
     const showFooter = useStore(state => state.showFooter)
+
+    const catalogue = useStore(state => state.catalogue)
+
+    const amountLiked = [...catalogue.entries()].filter(([_, { liked }]) => liked).length
+
+    const amounInBag = [...catalogue.entries()].filter(([_, { inBag }]) => inBag).length
 
     if (!showFooter) return null
 
@@ -43,14 +69,16 @@ const FooterBar = () => {
                     </Flex>
                 </Link>
                 <Link href='/liked' passHref>
-                    <Flex>
+                    <BadgedFlex>
                         <SizedImage src='/Liked.svg' alt='Liked' width={20} height={20}/>
-                    </Flex>
+                        {amountLiked && <Badge center>{amountLiked}</Badge>}
+                    </BadgedFlex>
                 </Link>
                 <Link href='/bag' passHref>
-                    <Flex>
+                    <BadgedFlex>
                         <SizedImage src='/Bag.svg' alt='Bag' width={20} height={20}/>
-                    </Flex>
+                        {amounInBag && <Badge center>{amounInBag}</Badge>}
+                    </BadgedFlex>
                 </Link>
                 <Link href='/scan' passHref>
                     <Flex>

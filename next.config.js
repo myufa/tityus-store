@@ -7,6 +7,11 @@ const nextConfig = {
         source: '/',
         destination: '/get-started',
         permanent: true,
+      },
+      {
+        source: '/shop',
+        destination: '/shop/kidney',
+        permanent: true,
       }
     ]
   },
