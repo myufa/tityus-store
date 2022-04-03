@@ -21,6 +21,11 @@ export type OrganItem = {
     inBag: boolean,
 }
 
+export enum AquireMethod {
+    DELIVERY = 'delivery',
+    PICKUP = 'pick up'
+}
+
 type StoreType = {
     menuOpen: boolean,
     toggleMenu: () => void,
@@ -31,7 +36,9 @@ type StoreType = {
     useFooter: (show?: boolean) => void,
     catalogue: Map<number, OrganItem>,
     updateCatalogue: (itemId: number, update: Partial<OrganItem>) => void,
-    clearCatalogue: () => void
+    clearCatalogue: () => void,
+    aquireMethod: AquireMethod,
+    updateAquireMethod: (medtho: AquireMethod) => void
 }
 const useStore = create<StoreType>(set => ({
     menuOpen: false,
@@ -56,7 +63,9 @@ const useStore = create<StoreType>(set => ({
         }
         return ({ catalogue: newMap })
     }),
-    clearCatalogue: () => set(state => ({ catalogue: organCatalogue }))
+    clearCatalogue: () => set(state => ({ catalogue: organCatalogue })),
+    aquireMethod: AquireMethod.DELIVERY,
+    updateAquireMethod: (method: AquireMethod) => set(state => ({ aquireMethod: method }))
 }))
 
 export default useStore

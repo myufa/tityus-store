@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import Flex from 'components/common/flex'
 import SizedImage from 'components/common/sized-image'
 
-import useStore from 'store'
+import useStore, { AquireMethod } from 'store'
 import { useRouter } from 'next/router'
 
 const Container = styled(Flex)`
@@ -114,6 +114,9 @@ const ShippingPage = () => {
     useHeader()
     useFooter()
 
+    const updateAquireMethod = useStore(state => state.updateAquireMethod)
+    const aquireMethod = useStore(state => state.aquireMethod)
+
     const router = useRouter()
 
     const onClickBack = () => router.back()
@@ -134,7 +137,10 @@ const ShippingPage = () => {
                     justifyContent='space-between'
                     paddingLeft={30}
                     >
-                    <MethodCheckBox type='checkbox' />
+                    <MethodCheckBox
+                        type='checkbox'
+                        checked={aquireMethod === AquireMethod.DELIVERY}
+                        onClick={() => updateAquireMethod(AquireMethod.DELIVERY)} />
                     <Flex widthPct={60}>Shipping</Flex>
                 </ShippingContainer>
                 <Flex
@@ -143,7 +149,10 @@ const ShippingPage = () => {
                     alignItems='center'
                     justifyContent='space-between'
                     paddingLeft={30}>
-                    <MethodCheckBox type='checkbox' />
+                    <MethodCheckBox
+                        type='checkbox'
+                        checked={aquireMethod === AquireMethod.PICKUP}
+                        onClick={() => updateAquireMethod(AquireMethod.PICKUP)}/>
                     <Flex widthPct={60}>In-store pickup</Flex>
                 </Flex>
             </MethodContainer>

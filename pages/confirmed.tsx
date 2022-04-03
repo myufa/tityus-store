@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid'
 import Flex from 'components/common/flex'
 import SizedImage from 'components/common/sized-image'
 
-import useStore, { Organ } from 'store'
+import useStore, { AquireMethod, Organ } from 'store'
 
 import Kidney from 'public/home/kidneyweb.png'
 import Liver from 'public/home/liver1.png'
@@ -93,6 +93,8 @@ const ConfirmedPage = () => {
     const ID = uuid()
 
     const updateCatalogue = useStore(state => state.updateCatalogue)
+    const aquireMethod = useStore(state => state.aquireMethod)
+    const updateAquireMethod = useStore(state => state.updateAquireMethod)
 
     const catalogue = useStore(state => state.catalogue)
 
@@ -105,6 +107,7 @@ const ConfirmedPage = () => {
             purchasedItems.forEach(([itemId, _]) => {
                 updateCatalogue(itemId, { inBag: false })
             })
+            updateAquireMethod(AquireMethod.DELIVERY)
         }
     }, [])
 
@@ -126,14 +129,14 @@ const ConfirmedPage = () => {
             <PurchasedBanner paddingLeft={30} paddingRight={30} paddingTop={10}>
                 <Flex fullHeight>
                     <PackageConatiner width={50} height={50} center marginRight={20} marginTop={5}>
-
                         <SizedImage src='/package.svg' alt='Package' width={24} height={24} />
                     </PackageConatiner>
                 </Flex>
                 <Flex column>
                     <OrderInfo>Order ID #{ID.slice(0,7)}</OrderInfo>
                     <Summary>
-                        {purchasedItems.length} Items&nbsp;&nbsp;&nbsp;&nbsp;•
+                        {purchasedItems.length} Items&nbsp;&nbsp;&nbsp;&nbsp;
+                        •{aquireMethod === AquireMethod.DELIVERY ? 'Delivery' : 'In-store pickup'}
                         </Summary>
                     <OrderInfo>${totalCost.toLocaleString('en-US')}</OrderInfo>
                 </Flex>

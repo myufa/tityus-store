@@ -51,8 +51,7 @@ const ProductSearch = () => {
                 center fullWidth>
                 <SearchInput placeholder='Search Product' />
                 <SearchButton>
-                    <SizedImage src='/scan-search.svg' alt='Search' width={24} height={24} />
-                    <input type='file' accept='image/*' capture='user'/>
+                    <SizedImage src='/search.svg' alt='Search' width={24} height={24} />
                 </SearchButton>
             </Flex>
         </Flex>
