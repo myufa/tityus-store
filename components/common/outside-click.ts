@@ -4,7 +4,7 @@ const useOutsideClick = <T extends HTMLElement>(callback: () => void) => {
     const ref = useRef<T>(null)
 
     useEffect(() => {
-        function handleClickOutside(event: Event) {
+        function handleClickOutside(event: any) {
             if (ref.current &&  !ref.current.contains(event.target)) {
                 callback()
             }
