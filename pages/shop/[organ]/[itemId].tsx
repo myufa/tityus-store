@@ -44,7 +44,7 @@ const Container = styled(Flex)`
 const Heading = styled.h1`
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 24px;
     line-height: 36px;
     width: 80%;
@@ -121,6 +121,22 @@ const AddToCartButton = styled.button`
     cursor: pointer;
 `
 
+const PageRoute = styled.h2`
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+`
+
+const ShopSpan = styled.span`
+    color: black;
+`
+
+const ProductListingSpan = styled.span`
+    color: #BD4040;
+`
+
 const StoresPage = () => {
     const useHeader = useStore(state => state.useHeader)
     const useFooter =  useStore(state => state.useFooter)
@@ -150,14 +166,27 @@ const StoresPage = () => {
     }
 
     const {
-        name, organType, price, vendorAge,
-        amount, origin, procedureDate, inBag
+        id, organType, bloodType, price, vendorAge,
+        amount, procedureDate, inBag, liked
     } = item
+
+    const likedString = liked ? 'liked' : 'unliked'
+    const onClickLike = (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (e) e.preventDefault()
+        if (inBag) return
+        updateCatalogue(+itemId, { liked: !liked })
+    }
 
     return (
         <Container column>
-            <Flex alignItems='center'>
-                <Heading>{name}</Heading>
+            <Flex>
+                <PageRoute>
+                    <ShopSpan>Shop&nbsp;</ShopSpan>
+                    <ProductListingSpan>&gt;&nbsp;Product Listing</ProductListingSpan>
+                </PageRoute>
+            </Flex>
+            <Flex alignItems='center' widthPct={90}>
+                <Heading>{id}</Heading>
             </Flex>
             <Flex justifyContent='space-between'>
                 <Flex column widthPct={40}>
@@ -165,10 +194,12 @@ const StoresPage = () => {
                         <DetailLabel>{metricMap[organType]}</DetailLabel>
                         <DetailValue>{amount}</DetailValue>
                     </DetailConatiner>
-                    <DetailConatiner column center>
-                        <DetailLabel>Origin</DetailLabel>
-                        <DetailValue>{origin}</DetailValue>
-                    </DetailConatiner>
+                    {organType !== Organ.CORNEA && (
+                        <DetailConatiner column center>
+                            <DetailLabel>{organType === Organ.MARROW ? 'HLA Type' : 'Blood Type'}</DetailLabel>
+                            <DetailValue>{organType === Organ.MARROW && 'HLA-'}{bloodType}</DetailValue>
+                        </DetailConatiner>
+                    )}
                     <DetailConatiner column center>
                         <DetailLabel>Vendor’s Age</DetailLabel>
                         <DetailValue>{vendorAge}</DetailValue>
@@ -178,12 +209,22 @@ const StoresPage = () => {
                         <DetailValue>{procedureDate}</DetailValue>
                     </DetailConatiner>
                 </Flex>
-                <Flex column widthPct={50} center>
-                    <SizedImage
-                        src={organImageMap[organType].image}
-                        alt={organType}
-                        width={organImageMap[organType].w}
-                        height={organImageMap[organType].h} />
+                <Flex column widthPct={50}>
+                    <Flex fullWidth justifyContent='flex-end'>
+                        <SizedImage
+                            src={`/${likedString}-icon.svg`}
+                            alt='like'
+                            width={35}
+                            height={35}
+                            onClick={onClickLike} />
+                    </Flex>
+                    <Flex center fullHeight>
+                        <SizedImage
+                            src={organImageMap[organType].image}
+                            alt={organType}
+                            width={organImageMap[organType].w}
+                            height={organImageMap[organType].h} />
+                    </Flex>
                 </Flex>
             </Flex>
             <Flex justifyContent='space-between'>

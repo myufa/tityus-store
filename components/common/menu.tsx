@@ -29,6 +29,7 @@ const BarContainer = styled(Flex)<BarContainerProps>`
     bottom: 0;
     opacity: ${({ active }) => active ? 1 : 0};
     transition: opacity 0.5s;
+    z-index: 4;
 `
 
 const Bar = styled(Flex)`

@@ -19,7 +19,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Noto%20Sans&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
             rel="stylesheet"
           />
           <link
@@ -28,6 +28,10 @@ class MyDocument extends Document {
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
             rel="stylesheet"
           />
         </Head>

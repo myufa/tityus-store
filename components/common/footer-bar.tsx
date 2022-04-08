@@ -45,6 +45,7 @@ const Container = styled(Flex)`
     width: 100%;
     position: fixed;
     bottom: 15px;
+    z-index: 3;
 `
 
 const Bar = styled(Flex)`
@@ -60,8 +61,8 @@ const Badge = styled(Flex)`
     position: absolute;
     width: 18px;
     height: 19px;
-    bottom: -8px;
-    right: -8px;
+    bottom: -4px;
+    right: -4px;
     border-radius: 1000px;
     font-family: 'Poppins';
     font-style: normal;
@@ -77,11 +78,26 @@ const BadgedFlex = styled(Flex)`
     position: relative;
 `
 
+const SearchButton = styled(Flex)`
+    background: #BD4040;
+    color: white;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 12px;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 10px;
+
+`
+
 
 const FooterBar = () => {
     const showFooter = useStore(state => state.showFooter)
 
     const catalogue = useStore(state => state.catalogue)
+
+    const toggleSearch = useStore(state => state.toggleSearch)
 
     const amountLiked = [...catalogue.entries()].filter(([_, { liked }]) => liked).length
 
@@ -89,11 +105,15 @@ const FooterBar = () => {
 
     const router = useRouter()
 
+    const isConfirmed = router.pathname.includes('confirmed')
     const isHome = router.pathname.includes('home')
     const isLiked = router.pathname.includes('liked')
     const isBag = router.pathname.includes('bag')
 
-    console.log('router.pathname', router.pathname, isLiked, isBag)
+    const onClickSearch = () => {
+        if (isHome) return
+        toggleSearch(true)
+    }
 
     if (!showFooter) return null
 
@@ -108,21 +128,20 @@ const FooterBar = () => {
                 <Link href='/liked' passHref>
                     <BadgedFlex width={30} height={31} center>
                         <LikedIcon selected={isLiked}/>
-                        {amountLiked > 0 && <Badge center>{amountLiked}</Badge>}
+                        {amountLiked > 0 && !isConfirmed && <Badge center>{amountLiked}</Badge>}
                     </BadgedFlex>
                 </Link>
                 <Link href='/bag' passHref>
                     <BadgedFlex width={30} height={31} center>
                         <BaggedIcon selected={isBag}/>
-                        {amounInBag > 0 && <Badge center>{amounInBag}</Badge>}
+                        {amounInBag > 0 && !isConfirmed && <Badge center>{amounInBag}</Badge>}
                     </BadgedFlex>
                 </Link>
-                <Link href='/scan' passHref>
-                    <Flex>
-                        <SizedImage src={ScanIcon} alt='Liked' width={100} height={40}/>
-                    </Flex>
-                </Link>
-
+                <SearchButton alignItems='center' onClick={onClickSearch}>
+                    <SizedImage src='/search.svg' alt='Search' width={24} height={24}/>
+                    &nbsp;
+                    <span>Search</span>
+                </SearchButton>
             </Bar>
         </Container>
     )

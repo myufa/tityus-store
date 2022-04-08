@@ -70,14 +70,16 @@ const StoresPage = () => {
             <CatalogueContainer justifyContent='space-between'>
                 {[...catalogue.entries()]
                     .filter(([_, { organType }]) => organType === organ)
-                    .map(([itemId, { organType, name, price, liked }]) => (
+                    .map(([itemId, { organType, bloodType, id, price, liked, inBag }]) => (
                     <OrganCard
                         key={itemId}
                         itemId={itemId}
                         organType={organType}
-                        name={name}
+                        bloodType={bloodType}
+                        id={id}
                         price={price}
-                        liked={liked} />
+                        liked={liked}
+                        inBag={inBag} />
                 ))}
             </CatalogueContainer>
         </Container>

@@ -10,6 +10,26 @@ import ProductSearch from 'components/common/product-search'
 import FooterBar from 'components/common/footer-bar'
 import Menu from 'components/common/menu'
 import { useEffect } from 'react'
+import Flex from 'components/common/flex'
+import useOutsideClick from 'components/common/outside-click'
+
+
+const Mask = styled(Flex)`
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 70px;
+    overflow: hidden;
+    background: #A7A7A7;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+`
+
+const SearchContainer = styled(Flex)`
+  position: absolute;
+  top: 100px;
+  z-index: 5;
+`
 
 type AppContainerProps = { hide?: boolean }
 const AppContainer = styled.div<AppContainerProps>`
@@ -30,10 +50,14 @@ const FooterPad = styled.div`
 
 function MyApp({ Component, pageProps }: AppProps) {
   const menuOpen = useStore(state => state.menuOpen)
+  const showSearch = useStore(state => state.showSearch)
+  const toggleSearch = useStore(state => state.toggleSearch)
+
   const showFooter = useStore(state => state.showFooter)
   const hideMenu = useStore(state => state.hideMenu)
   const router = useRouter()
-  // hideMenu()
+  const { ref: SearchRef } = useOutsideClick<HTMLDivElement>(() => toggleSearch(false))
+
   useEffect(() => {
     hideMenu()
   }, [router.pathname])
@@ -44,6 +68,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         strategy="beforeInteractive"
       />
       <Header />
+      {showSearch && (
+        <>
+          <Mask />
+          <SearchContainer center fullWidth ref={SearchRef}>
+            <ProductSearch />
+          </SearchContainer>
+        </>
+      )}
       <AppContainer hide={menuOpen}>
         <Component {...pageProps} />
       </AppContainer>

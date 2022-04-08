@@ -9,14 +9,14 @@ export enum Organ {
 }
 
 export type OrganItem = {
+    id: string,
     organType: Organ,
     name: string,
     price: number,
     amount: string,
-    stock: number,
     procedureDate: string,
-    origin: string,
     vendorAge: number,
+    bloodType?: string,
     liked: boolean,
     inBag: boolean,
 }
@@ -34,6 +34,8 @@ type StoreType = {
     showFooter: boolean,
     useHeader: (show?: boolean) => void,
     useFooter: (show?: boolean) => void,
+    showSearch: boolean,
+    toggleSearch: (show: boolean) => void,
     catalogue: Map<number, OrganItem>,
     updateCatalogue: (itemId: number, update: Partial<OrganItem>) => void,
     clearCatalogue: () => void,
@@ -54,6 +56,8 @@ const useStore = create<StoreType>(set => ({
     useFooter: (show?: boolean) => set(
         state => ({ showFooter: show===true || show===undefined })
     ),
+    showSearch: false,
+    toggleSearch: (show: boolean) => set(state => ({ showSearch: show })),
     catalogue: organCatalogue,
     updateCatalogue: (itemId, update) => set(state => {
         const newMap = new Map(state.catalogue.entries())
