@@ -36,10 +36,9 @@ const AppContainer = styled.div<AppContainerProps>`
   transition: opacity 0.5s ease-in, height 0.3s linear 0.6s;
   min-height: 100vh;
   ${({ hide }) => hide ? css`
-      height: ${window.innerHeight - 140}px;
+      height: 0;
       overflow: hidden;
   ` : css`
-      opacity: 1;
       height: 100%;
   `}
 `
@@ -57,7 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const hideMenu = useStore(state => state.hideMenu)
   const router = useRouter()
   const { ref: SearchRef } = useOutsideClick<HTMLDivElement>(() => toggleSearch(false))
-
+  if (menuOpen || showSearch) document.body.style.overflow = 'hidden'
   useEffect(() => {
     hideMenu()
   }, [router.pathname])
