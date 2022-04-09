@@ -18,7 +18,7 @@ const Mask = styled(Flex)`
     height: 100%;
     width: 100%;
     position: fixed;
-    top: 70px;
+    top: 0;
     overflow: hidden;
     background: #A7A7A7;
     opacity: 0.6;
@@ -26,7 +26,7 @@ const Mask = styled(Flex)`
 `
 
 const SearchContainer = styled(Flex)`
-  position: absolute;
+  position: fixed;
   top: 100px;
   z-index: 5;
 `
@@ -56,10 +56,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   const hideMenu = useStore(state => state.hideMenu)
   const router = useRouter()
   const { ref: SearchRef } = useOutsideClick<HTMLDivElement>(() => toggleSearch(false))
-  if (menuOpen || showSearch) document.body.style.overflow = 'hidden'
+
   useEffect(() => {
     hideMenu()
   }, [router.pathname])
+
+  useEffect(() => {
+    if (document) {
+      if (menuOpen || showSearch) {
+        document.body.style.overflow = 'hidden'
+      }
+    }
+    return () => {
+      if (document) {
+        document.body.style.overflow = ''
+      }
+    }
+  }, [menuOpen, showSearch])
   return(
     <div className='layout'>
       <Script
@@ -75,7 +88,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </SearchContainer>
         </>
       )}
-      <AppContainer hide={menuOpen}>
+      <AppContainer hide={menuOpen || showSearch}>
         <Component {...pageProps} />
       </AppContainer>
       <FooterBar />
