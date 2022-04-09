@@ -211,7 +211,7 @@ const ShippingPage = () => {
             </MethodContainer>
             <br />
             {aquireMethod === AquireMethod.DELIVERY ?(
-                <Flex>
+                <Flex justifyContent='center'>
                     <Flex column>
                         <Flex>
                             <SubHeading>Shipping Address</SubHeading>

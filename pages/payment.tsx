@@ -40,6 +40,7 @@ const InfoInput = styled.input`
     margin-bottom: 20px;
     height: 54px;
     text-indent: 20px;
+    width: 100%;
     ::placeholder {
         font-family: 'Poppins';
         font-style: normal;
@@ -180,7 +181,7 @@ const ShippingPage = () => {
             <br />
             <InfoInput placeholder='Card Holder Name' />
             <InfoInput placeholder='Card Number' />
-            <Flex>
+            <Flex justifyContent='center' fullWidth>
                 <InfoInput placeholder='MM/YY' />
                 &nbsp;
                 <InfoInput placeholder='CVV' />
