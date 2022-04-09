@@ -185,11 +185,11 @@ const ShippingPage = () => {
                 &nbsp;
                 <InfoInput placeholder='CVV' />
             </Flex>
-            <Flex paddingTop={10} paddingBottom={10}>
+            <Flex paddingTop={10} paddingBottom={10} center>
                 <SizedImage src='/divider.svg' alt='divider' width={300} height={2}/>
             </Flex>
             <br />
-            <SaveCard fullWidth alignItems='center'>
+            <SaveCard fullWidth center>
                 <SaveCardCheckbox type='checkbox' />
                 &nbsp;&nbsp;
                 Save this card

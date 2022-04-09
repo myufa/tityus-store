@@ -96,7 +96,7 @@ const ProductSearch = () => {
         <Flex column paddingBottom={20}>
             <SearchContainer
                 center fullWidth>
-                <SearchInput placeholder='Search Product' value={query} onChange={e => setQuery(e.currentTarget.value)} />
+                <SearchInput placeholder='Enter Serial Number' value={query} onChange={e => setQuery(e.currentTarget.value)} />
                 <SearchButton>
                     <SizedImage src='/search.svg' alt='Search' width={24} height={24} />
                 </SearchButton>

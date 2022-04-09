@@ -134,7 +134,7 @@ const BagPage = () => {
                 <Heading>Shopping Cart</Heading>
             </Flex>
             <CartContainer>
-                {inBagItems.map(([itemId, { name, organType, price }]) => (
+                {inBagItems.map(([itemId, { organType, price, id }]) => (
                     <InBagCard key={itemId} column justifyContent='center'>
                         <Flex alignItems='center' justifyContent='space-between'>
                             <Flex widthPct={30} justifyContent='flex-start'>
@@ -144,7 +144,7 @@ const BagPage = () => {
                                     width={organImageMap[organType].w}
                                     height={organImageMap[organType].h}/>
                             </Flex>
-                            <Info>{name}<br />${price.toLocaleString('en-US')}</Info>
+                            <Info>{id}<br />${price.toLocaleString('en-US')}</Info>
                             <Flex widthPct={10} justifyContent='flex-end'>
                                 <SizedImage
                                     src='/trash-icon.svg'

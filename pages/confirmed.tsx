@@ -141,7 +141,7 @@ const ConfirmedPage = () => {
                     <OrderInfo>${totalCost.toLocaleString('en-US')}</OrderInfo>
                 </Flex>
             </PurchasedBanner>
-            {purchasedItems.map(([itemId, { name, organType, price }]) => (
+            {purchasedItems.map(([itemId, { id, organType }]) => (
                 <PurchasedCard key={itemId} column>
                     <Flex alignItems='center' justifyContent='space-between'>
                         <Flex widthPct={40} justifyContent='flex-start'>
@@ -152,7 +152,7 @@ const ConfirmedPage = () => {
                                 height={organImageMap[organType].h}/>
                         </Flex>
                         <Flex widthPct={60}>
-                            <Info>{name}</Info>
+                            <Info>{id}</Info>
                         </Flex>
                     </Flex>
                 </PurchasedCard>
